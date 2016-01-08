@@ -1,0 +1,8 @@
+{
+  "browser": true,
+  "devel": true,
+  "globalstrict": true,
+  "globals": {
+    "require": true,
+  }
+}
