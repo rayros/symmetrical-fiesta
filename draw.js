@@ -1,5 +1,5 @@
 function Draw(id, analyser, bgcolor) {
-  var c = document.getElementById("audioAnalyzer");
+  var c = document.getElementById(id);
   this.bgcolor = bgcolor;
   this.ctx = c.getContext("2d");
   this.WIDTH = c.width;
