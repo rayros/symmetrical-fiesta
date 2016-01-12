@@ -12,10 +12,11 @@ Draw.prototype.start = function() {
   var ctx = this.ctx,
       w = this.WIDTH,
       h = this.HEIGHT,
+      half_h = h / 2,
       lenght = this.lenght,
       sliceWidth = w * 1.0 / lenght,
       data = this.data,
-      x = 0;
+      x = 0, y, index;
   requestAnimationFrame(this.start.bind(this));
   this.analyser.getByteTimeDomainData(data);
   ctx.fillStyle = this.bgcolor;
@@ -23,16 +24,13 @@ Draw.prototype.start = function() {
   ctx.lineWidth = 1.2;
   ctx.strokeStyle = 'rgb(0, 0, 0)';
   ctx.beginPath();
-  for(var i = 0; i < lenght; i++) {
-    var v = data[i] / 128.0,
-        y = v * h/2;
-    if(i === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
+  y = (data[0] / 128.0) * half_h;
+  ctx.moveTo(x, y);
+  for(index = 1; index < lenght; ++index) {
+    y = (data[index] / 128.0) * half_h;
+    ctx.lineTo(x, y);
     x += sliceWidth;
   }
-  ctx.lineTo(w, h/2);
+  ctx.lineTo(w, half_h);
   ctx.stroke();
 }
